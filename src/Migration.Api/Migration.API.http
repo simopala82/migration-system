@@ -1,0 +1,91 @@
+@Migration.API_HostAddress = http://localhost:5062
+
+# AuthController - Ottieni token admin fittizio per userold
+GET {{Migration.API_HostAddress}}/api/v1/Auth/token/admin/2
+Accept: application/json
+
+> {% 
+ const obj = JSON.parse(response.body);
+ client.global.set("jwt_token", obj.token);
+%}
+
+###
+
+# AuthController - Ottieni token admin fittizio per usernew
+GET {{Migration.API_HostAddress}}/api/v1/Auth/token/admin/00000000-0000-0000-0000-000000000001
+Accept: application/json
+
+> {% 
+ const obj = JSON.parse(response.body);
+ client.global.set("jwt_token", obj.token);
+%}
+
+###
+
+# AuthController - Ottieni token user fittizio per userold
+GET {{Migration.API_HostAddress}}/api/v1/Auth/token/user/1
+Accept: application/json
+
+> {% 
+ const obj = JSON.parse(response.body);
+ client.global.set("jwt_token", obj.token);
+%}
+
+###
+
+# AuthController - Ottieni token user fittizio (UserNew, esempio con GUID)
+GET {{Migration.API_HostAddress}}/api/v1/Auth/token/user/00000000-0000-0000-0000-000000000001
+Accept: application/json
+
+> {% 
+ const obj = JSON.parse(response.body);
+ client.global.set("jwt_token", obj.token);
+%}
+
+###
+
+# UserOldController - GET user info
+GET {{Migration.API_HostAddress}}/api/v1/UserOld
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+###
+
+# UserOldController - POST accetta la migrazione
+POST {{Migration.API_HostAddress}}/api/v1/UserOld/migration/accept
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{}
+
+###
+
+# UserNewController - GET user info
+GET {{Migration.API_HostAddress}}/api/v1/UserNew
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+###
+
+# AdminController - GET slot status
+GET {{Migration.API_HostAddress}}/api/v1/Admin/slot/status
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+###
+
+# AdminController - POST forza la migrazione per userold
+POST {{Migration.API_HostAddress}}/api/v1/Admin/migration/1
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+###
+
+# AdminController - GET migration status
+GET {{Migration.API_HostAddress}}/api/v1/Admin/migration/status
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+###

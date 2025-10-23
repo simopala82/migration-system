@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "b0293488-50a8-429b-9592-4f1d101c4d7b",
+		"name": "Migration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "73518"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "TokenUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody = pm.response.json();\r",
+									"var bearer = \"bearer \" + responseBody.token;\r",
+									"\r",
+									"pm.environment.set(\"migration-token\", bearer);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7202/api/v1/auth/token/user/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7202",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"token",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AcceptMigration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{migration-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7202/api/v1/userold/migration/accept",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7202",
+							"path": [
+								"api",
+								"v1",
+								"userold",
+								"migration",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserOld",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{migration-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7202/api/v1/userold",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7202",
+							"path": [
+								"api",
+								"v1",
+								"userold"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserNew",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{migration-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7202/api/v1/usernew",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7202",
+							"path": [
+								"api",
+								"v1",
+								"usernew"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "TokenAdmin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody = pm.response.json();\r",
+									"var bearer = \"bearer \" + responseBody.token;\r",
+									"\r",
+									"pm.environment.set(\"migration-token\", bearer);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7202/api/v1/auth/token/admin/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7202",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"token",
+								"admin",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SlotStatus",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{migration-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7202/api/v1/admin/slot/status",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7202",
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"slot",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MigrationStatus",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{migration-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7202/api/v1/admin/migration/status",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7202",
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"migration",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ForceMigration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{migration-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7202/api/v1/admin/migration/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7202",
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"migration",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
