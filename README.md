@@ -22,7 +22,9 @@ The project utilizes three SQL Server-based databases (OLD, NEW, Audit). To run 
 
 Use the following command to start the SQL Server container and accept the EULA:
 
+```
 podman run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P5tNqWwhFaoNHE6APe13" -p 1433:1433 -v sql-server-volume:/data --name sql-server -h sql-server -d mcr.microsoft.com/mssql/server:2019-latest
+```
 > **NOTE:** The password is set to `P5tNqWwhFaoNHE6APe13`. Ensure the connection strings in the projects are aligned with these values.
 
 ### 2. Creating and Seeding Databases
@@ -34,8 +36,12 @@ After starting the container, apply the Entity Framework Core migrations to crea
 
 After updating the databases, start the project:
 
+```
 dotnet run --project Migration.API
-you can use postman collection to run the api
+```
+You can use postman collection to run the api.
 
-you can execute a single migration worker for a single user
-dotnet run --project Migration.Worker -- 1
+You can execute a single migration worker for a single user:
+```
+dotnet run --project Migration.Worker -- {id}
+```
