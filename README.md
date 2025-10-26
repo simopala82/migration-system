@@ -1,4 +1,4 @@
-﻿Ecco il contenuto Markdown completo e unificato del documento, pronto per essere copiato e incollato direttamente in un file, mantenendo tutta la formattazione (codice, tabelle, link):# 1. README: Piattaforma Asincrona di Migrazione Utente (OLD -> NEW)
+Piattaforma Asincrona di Migrazione Utente (OLD -> NEW)
 
 ## 🎯 Project Overview
 
