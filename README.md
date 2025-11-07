@@ -31,7 +31,21 @@ podman run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P5tNqWwhFaoNHE6APe13" -p 1433:1433
 
 After starting the container, apply the Entity Framework Core migrations to create the schemas for all three databases:
 
-1. Database for the New Platform (NEW)dotnet ef database update --project Migration.DataAccess --startup-project Migration.Worker --context UserNewDbContext2. Legacy Database (OLD) with Seed Datadotnet ef database update --project Migration.DataAccess --startup-project Migration.Worker --context UserOldDbContext3. Audit and Migration Status Databasedotnet ef database update --project Migration.DataAccess --startup-project Migration.Worker --context MigrationDbContext
+1. Database for the New Platform (NEW)
+```
+dotnet ef database update --project Migration.DataAccess --startup-project Migration.Worker --context UserNewDbContext2
+```
+
+Legacy Database (OLD) with Seed Data
+```
+dotnet ef database update --project Migration.DataAccess --startup-project Migration.Worker --context UserOldDbContext3
+```
+
+Audit and Migration Status Database
+```
+dotnet ef database update --project Migration.DataAccess --startup-project Migration.Worker --context MigrationDbContext
+```
+
 ### 3. Executing the Application
 
 After updating the databases, start the project:
